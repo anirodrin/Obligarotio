@@ -8,6 +8,7 @@ namespace Dominio
 {
     public abstract class Excursion
     {
+        #region ATRIBUTOS
         private string codigo;
         private string descrpcion;
         private DateTime fechaInicio;
@@ -16,6 +17,8 @@ namespace Dominio
         private int puntos;
         private double costoDiario;
         private DestinoExcursion destinos;
+
+        #endregion
 
     }
 }

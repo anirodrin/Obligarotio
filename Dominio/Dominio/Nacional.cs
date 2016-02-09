@@ -8,6 +8,8 @@ namespace Dominio
 {
     class Nacional: Excursion
     {
+        #region ATRIBUTOS
         public int descuento;
+        #endregion
     }
 }

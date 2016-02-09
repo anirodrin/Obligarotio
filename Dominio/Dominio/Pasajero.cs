@@ -6,26 +6,33 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class Pasajero
+    public class Pasajero
     {
         #region ATRIBUTOS
         private int id;
         public static int ultId = 0;
         public string nombre;
         public string apellido;
-        public string documento;
+        private string documento;
         public int puntajeAcumulado;
         #endregion
 
+        #region PROPIEDADES
         public int Id
         {
             get { return this.id; }
         }
 
-        #region CONSTRUCTOR
-        public Pasajero(string nombre, string apellido, string documento) 
+        public string Documento
         {
-            this.id =++ Pasajero.ultId;
+            get { return this.documento; }
+        }
+        #endregion
+
+        #region CONSTRUCTOR
+        public Pasajero(string nombre, string apellido, string documento)
+        {
+            this.id = ++Pasajero.ultId;
             this.nombre = nombre;
             this.apellido = apellido;
             this.documento = documento;
@@ -33,18 +40,41 @@ namespace Dominio
         }
         #endregion
 
+        #region VALIDACIONES DE ATRIBUTOS
+
+        public static bool ValidoNombre(string nombre)
+        {
+            return !string.IsNullOrEmpty(nombre);
+        }
+
+        public static bool ValidoApellido(string apellido)
+        {
+            return !string.IsNullOrEmpty(apellido);
+        }
+
+        public static bool ValidoPuntaje(int puntaje)
+        {
+
+            bool ret = (puntaje >= 0) ? true : false;
+
+            return ret;
+        }
+
+        public static bool ValidoCi(string ci) 
+        {
+            return !string.IsNullOrEmpty(ci);
+        }
+
+        #endregion
+
         #region MODIFICACION PASAJERO
 
-        public bool Modificacion(string nombre, string apellido, string documento, int puntaje) 
+        public void Modificacion(string nombre, string apellido, string documento, int puntaje)
         {
-            bool ret = false;
             this.nombre = nombre;
             this.apellido = apellido;
             this.documento = documento;
             this.puntajeAcumulado = puntaje;
-            ret = true;
-
-            return ret;
         }
 
         #endregion

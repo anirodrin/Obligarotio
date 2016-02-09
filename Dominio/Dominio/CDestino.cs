@@ -8,7 +8,7 @@ namespace Dominio
 {
     class CDestino
     {
-         #region ATRIBUTOS
+        #region ATRIBUTOS
         public List<Destino> destinos = new List<Destino>();
         #endregion
 

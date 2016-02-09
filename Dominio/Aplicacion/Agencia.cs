@@ -9,12 +9,21 @@ namespace Aplicacion
 {
     public class Agencia
     {
+        #region ALTA PASAJERO
         public bool AltaPasajero(string nombre, string apellido, string documento) 
         {
-            bool ret = CPasajero.Instancia.AltaPasajero(nombre, apellido, documento);
+            return CPasajero.Instancia.AltaPasajero(nombre, apellido, documento);
 
-            return ret;
-            
         }
+        #endregion
+
+        #region MODIFICACION PASAJERO
+        public bool AltaPasajero(string nombre, string apellido, string documento, int puntaje, int id)
+        {
+            return CPasajero.Instancia.ModificacionPasajero(nombre, apellido, documento, puntaje, id);
+
+        }
+        #endregion
+
     }
 }

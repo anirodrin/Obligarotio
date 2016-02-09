@@ -35,39 +35,84 @@ namespace Dominio
         {
             bool ret = false;
 
-            Pasajero aux = new Pasajero(nombre, apellido, documento);
-            ret = true;
-
+            if (Pasajero.ValidoCi(documento))
+            {
+                if (Pasajero.ValidoNombre(nombre))
+                {
+                    if (Pasajero.ValidoApellido(apellido))
+                    {
+                        Pasajero aux = BuscarPasajeroPorDoc(documento);
+                        if (aux == null)
+                        {
+                            ret = true;
+                            aux = new Pasajero(nombre, apellido, documento);
+                        }
+                    }
+                }
+            }
             return ret;
         }
 
         #endregion
 
         #region MODIFICACION PASAJERO
-        public bool AltaPasajero(string nombre, string apellido, string documento, int puntaje, int id)
+        public bool ModificacionPasajero(string nombre, string apellido, string documento, int puntaje, int id)
         {
             bool ret = false;
-            Pasajero aux = BuscarPasajero(id);
-            if (aux != null) 
+
+            if (Pasajero.ValidoCi(documento))
             {
-                aux.Modificacion(nombre, apellido, documento, puntaje);
-                ret = true;
-            } 
-            
+                if (Pasajero.ValidoNombre(nombre))
+                {
+                    if (Pasajero.ValidoApellido(apellido))
+                    {
+                        if (Pasajero.ValidoPuntaje(puntaje))
+                        {
+                            Pasajero aux = BuscarPasajeroPorId(id);
+                            if (aux != null)
+                            {
+                                aux.Modificacion(nombre, apellido, documento, puntaje);
+                                ret = true;
+                            }
+                        }
+                    }
+                }
+
+            }
+
             return ret;
         }
 
         #endregion
 
-        #region BUSCAR PASAJERO
+        #region BUSCAR PASAJERO POR ID
 
-        public Pasajero BuscarPasajero(int id) 
+        public Pasajero BuscarPasajeroPorId(int id)
         {
             Pasajero aux = null;
             int i = 0;
-            while (i < this.pasajeros.Count && aux != null) 
+            while (i < this.pasajeros.Count && aux != null)
             {
-                if (this.pasajeros[i].Id == id) 
+                if (this.pasajeros[i].Id == id)
+                {
+                    aux = this.pasajeros[i];
+                }
+                i++;
+            }
+            return aux;
+        }
+
+        #endregion
+
+        #region BUSCAR PASAJERO POR DOCUMENTO
+
+        public Pasajero BuscarPasajeroPorDoc(string doc)
+        {
+            Pasajero aux = null;
+            int i = 0;
+            while (i < this.pasajeros.Count && aux != null)
+            {
+                if (this.pasajeros[i].Documento == doc)
                 {
                     aux = this.pasajeros[i];
                 }

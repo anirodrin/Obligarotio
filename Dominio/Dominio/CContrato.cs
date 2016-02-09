@@ -9,7 +9,7 @@ namespace Dominio
     class CContrato
     {
         #region ATRIBUTOS
-        public List<Contrato> destinos = new List<Contrato>();
+        public List<Contrato> contratos = new List<Contrato>();
         #endregion
 
         #region SINGLETON
