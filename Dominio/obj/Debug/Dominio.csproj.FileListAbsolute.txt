@@ -1,0 +1,5 @@
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Dominio\obj\Debug\Dominio.csprojResolveAssemblyReference.cache
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Dominio\bin\Debug\Dominio.dll
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Dominio\bin\Debug\Dominio.pdb
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Dominio\obj\Debug\Dominio.dll
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Dominio\obj\Debug\Dominio.pdb

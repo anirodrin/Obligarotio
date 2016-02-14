@@ -1,0 +1,7 @@
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Aplicacion\obj\Debug\Aplicacion.csprojResolveAssemblyReference.cache
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Aplicacion\bin\Debug\Aplicacion.dll
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Aplicacion\bin\Debug\Aplicacion.pdb
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Aplicacion\bin\Debug\Dominio.dll
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Aplicacion\bin\Debug\Dominio.pdb
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Aplicacion\obj\Debug\Aplicacion.dll
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\Aplicacion\obj\Debug\Aplicacion.pdb

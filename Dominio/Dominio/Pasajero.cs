@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Dominio
@@ -13,6 +14,7 @@ namespace Dominio
         public static int ultId = 0;
         public string nombre;
         public string apellido;
+        public string tipoDocumento;
         private string documento;
         public int puntajeAcumulado;
         #endregion
@@ -30,12 +32,13 @@ namespace Dominio
         #endregion
 
         #region CONSTRUCTOR
-        public Pasajero(string nombre, string apellido, string documento)
+        public Pasajero(string nombre, string apellido, string documento, string tipoDocumento)
         {
             this.id = ++Pasajero.ultId;
             this.nombre = nombre;
             this.apellido = apellido;
             this.documento = documento;
+            this.tipoDocumento = tipoDocumento;
             this.puntajeAcumulado = 0;
         }
         #endregion
@@ -60,21 +63,46 @@ namespace Dominio
             return ret;
         }
 
-        public static bool ValidoCi(string ci) 
+        public static bool ValidoDocumento(string documento, string tipoDocumento) 
         {
-            return !string.IsNullOrEmpty(ci);
+            bool ret = !string.IsNullOrEmpty(documento);
+            if (ret) 
+            {
+                if (tipoDocumento == "CI") 
+                {
+                    ret = Regex.IsMatch(documento, "^[1-9]{1}[.][0-9]{3}[.][0-9]{3}[-][0-9]{1}$");
+                    if (!ret) 
+                    {
+                        ret = Regex.IsMatch(documento, "^[0-9]{3}.[0-9]{3}-[0-9]{1}$");
+                    }
+
+                }
+            }
+
+            return ret;
+        }
+
+        public static bool ValidoTipoDocumento(string tipoDocumento)
+        {
+            bool ret = !string.IsNullOrEmpty(tipoDocumento);
+            if (ret) 
+            {
+                ret = (tipoDocumento == "CI" || tipoDocumento == "PA") ? true : false;
+            }
+            return ret;
         }
 
         #endregion
 
         #region MODIFICACION PASAJERO
 
-        public void Modificacion(string nombre, string apellido, string documento, int puntaje)
+        public void Modificacion(string nombre, string apellido, string documento, int puntaje, string tipoDocumento)
         {
             this.nombre = nombre;
             this.apellido = apellido;
             this.documento = documento;
             this.puntajeAcumulado = puntaje;
+            this.tipoDocumento = tipoDocumento;
         }
 
         #endregion

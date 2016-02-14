@@ -31,21 +31,23 @@ namespace Dominio
         #endregion
 
         #region ALTA PASAJERO
-        public bool AltaPasajero(string nombre, string apellido, string documento)
+        public bool AltaPasajero(string nombre, string apellido, string documento, string tipoDocumento)
         {
             bool ret = false;
-
-            if (Pasajero.ValidoCi(documento))
+            if (Pasajero.ValidoTipoDocumento(tipoDocumento))
             {
-                if (Pasajero.ValidoNombre(nombre))
+                if (Pasajero.ValidoDocumento(documento, tipoDocumento))
                 {
-                    if (Pasajero.ValidoApellido(apellido))
+                    if (Pasajero.ValidoNombre(nombre))
                     {
-                        Pasajero aux = BuscarPasajeroPorDoc(documento);
-                        if (aux == null)
+                        if (Pasajero.ValidoApellido(apellido))
                         {
-                            ret = true;
-                            aux = new Pasajero(nombre, apellido, documento);
+                            Pasajero aux = BuscarPasajeroPorDocYTipo(documento, tipoDocumento);
+                            if (aux == null)
+                            {
+                                ret = true;
+                                aux = new Pasajero(nombre, apellido, documento, tipoDocumento);
+                            }
                         }
                     }
                 }
@@ -56,23 +58,37 @@ namespace Dominio
         #endregion
 
         #region MODIFICACION PASAJERO
-        public bool ModificacionPasajero(string nombre, string apellido, string documento, int puntaje, int id)
+        public bool ModificacionPasajero(string nombre, string apellido, string documento, int puntaje, int id, string tipoDocumento)
         {
             bool ret = false;
-
-            if (Pasajero.ValidoCi(documento))
+            if (Pasajero.ValidoTipoDocumento(tipoDocumento))
             {
-                if (Pasajero.ValidoNombre(nombre))
+                if (Pasajero.ValidoDocumento(documento, tipoDocumento))
                 {
-                    if (Pasajero.ValidoApellido(apellido))
+                    if (Pasajero.ValidoNombre(nombre))
                     {
-                        if (Pasajero.ValidoPuntaje(puntaje))
+                        if (Pasajero.ValidoApellido(apellido))
                         {
-                            Pasajero aux = BuscarPasajeroPorId(id);
-                            if (aux != null)
+                            if (Pasajero.ValidoPuntaje(puntaje))
                             {
-                                aux.Modificacion(nombre, apellido, documento, puntaje);
-                                ret = true;
+                                Pasajero aux = BuscarPasajeroPorId(id);
+                                if (aux != null)
+                                {
+                                    aux = BuscarPasajeroPorDocYTipo(documento, tipoDocumento);
+                                    if (aux != null)
+                                    {
+                                        if (aux.Id == id)
+                                        {
+                                            aux.Modificacion(nombre, apellido, documento, puntaje, tipoDocumento);
+                                            ret = true;
+                                        }
+                                    }
+                                    else 
+                                    {
+                                        aux.Modificacion(nombre, apellido, documento, puntaje, tipoDocumento);
+                                        ret = true;
+                                    }
+                                }
                             }
                         }
                     }
@@ -104,15 +120,15 @@ namespace Dominio
 
         #endregion
 
-        #region BUSCAR PASAJERO POR DOCUMENTO
+        #region BUSCAR PASAJERO POR DOCUMENTO Y TIPO DE DOCUMENTO
 
-        public Pasajero BuscarPasajeroPorDoc(string doc)
+        public Pasajero BuscarPasajeroPorDocYTipo(string doc, string tipoDoc)
         {
             Pasajero aux = null;
             int i = 0;
             while (i < this.pasajeros.Count && aux != null)
             {
-                if (this.pasajeros[i].Documento == doc)
+                if (this.pasajeros[i].Documento == doc && this.pasajeros[i].tipoDocumento == tipoDoc)
                 {
                     aux = this.pasajeros[i];
                 }
