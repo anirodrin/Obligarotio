@@ -78,6 +78,12 @@ namespace Aplicacion
         }
 
         #endregion
-    
+
+        #region LISTADO DE EXCURSIONES CONTRATADAS ENTRE DOS FECHAS
+        public List<Excursion> ListadoExcursionesContratadasEntreDosFechas(DateTime fInicio, DateTime fFin)
+        {
+            return CContrato.Instancia.ListadoExcursionesContratadasEntreDosFechas(fInicio, fFin);
+        }
+        #endregion
     }
 }

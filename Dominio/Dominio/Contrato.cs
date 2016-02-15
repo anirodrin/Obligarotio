@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class Contrato
+    public class Contrato
     {
         public List<Pasajero> pasajeros = new List<Pasajero>();
-        public Excursion excursion;
-        public DateTime fechaContrato;
+        private Excursion excursion;
+        private DateTime fechaContrato;
         public double precio;
+
+        public Excursion Excursion
+        {
+            get { return this.excursion; }
+        }
+
+        public bool ContratoEntreFechas(DateTime fInicio, DateTime fFin) 
+        {
+            return this.fechaContrato <= fFin && this.fechaContrato >= fInicio;
+        }
     }
 }

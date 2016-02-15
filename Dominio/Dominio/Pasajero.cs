@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Pasajero
+    public class Pasajero: IComparable<Pasajero>
     {
         #region ATRIBUTOS
         private int id;
@@ -106,5 +106,27 @@ namespace Dominio
         }
 
         #endregion
+
+        #region IMPLEMETACION DE METODO COMPARE TO DE PUNTAJES, APELLIDO Y NOMBRE
+        public int CompareTo(Pasajero otro)
+        {
+            int ret = 0;
+            if (otro != null) 
+            {
+                ret = this.puntajeAcumulado.CompareTo(otro.puntajeAcumulado);
+
+                if (ret == 0) 
+                {
+                    ret = this.apellido.CompareTo(otro.apellido);
+                    if (ret == 0) 
+                    {
+                        ret = this.nombre.CompareTo(otro.nombre);
+                    }
+                }
+            }
+            return ret;
+        }
+        #endregion
+
     }
 }

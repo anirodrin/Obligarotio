@@ -71,31 +71,31 @@ namespace Dominio
 
         #region ALTA EXCURSION NACIONAL
         public Nacional.ErroresAltaExcursion AltaExcursionNacional(string codigo, string descripcion,
-            DateTime fechaInicio, int diasTraslado, int stockDisponible,int puntos, double costoDiario, int descuento,
-            List<int> cantDias, List<string> destino)
+            DateTime fechaInicio, int diasTraslado, int stockDisponible, int puntos, double costoDiario, int descuento,
+            List<int> cantDias, List<string> destinos)
         {
             Nacional.ErroresAltaExcursion ret = Nacional.ErroresAltaExcursion.OK;
-            if (!Excursion.ValidoCodigo(codigo)) 
+            if (!Excursion.ValidoCodigo(codigo))
             {
                 ret = Nacional.ErroresAltaExcursion.Cod_Invalido;
             }
-            else if (!Excursion.ValidoDescripcion(descripcion)) 
+            else if (!Excursion.ValidoDescripcion(descripcion))
             {
                 ret = Nacional.ErroresAltaExcursion.Desc_Vaicia;
             }
-            else if (!Excursion.ValidoFechaInicio(fechaInicio)) 
+            else if (!Excursion.ValidoFechaInicio(fechaInicio))
             {
                 ret = Nacional.ErroresAltaExcursion.Fi_Invalida;
             }
-            else if (!Excursion.ValidoDiasTraslado(diasTraslado)) 
+            else if (!Excursion.ValidoDiasTraslado(diasTraslado))
             {
                 ret = Nacional.ErroresAltaExcursion.DiasTraslado_Invalido;
             }
-            else if (!Excursion.ValidoStockDisponible(stockDisponible)) 
+            else if (!Excursion.ValidoStockDisponible(stockDisponible))
             {
                 ret = Nacional.ErroresAltaExcursion.Stock_Invalido;
             }
-            else if (!Excursion.ValidoPuntos(puntos)) 
+            else if (!Excursion.ValidoPuntos(puntos))
             {
                 ret = Nacional.ErroresAltaExcursion.Puntos_Invalido;
             }
@@ -103,7 +103,7 @@ namespace Dominio
             {
                 ret = Nacional.ErroresAltaExcursion.Costo_Invalido;
             }
-            else if (!Nacional.ValidoDescuento(descuento)) 
+            else if (!Nacional.ValidoDescuento(descuento))
             {
                 ret = Nacional.ErroresAltaExcursion.Descuento_Invalido;
             }
@@ -114,7 +114,18 @@ namespace Dominio
                 {
                     aux = new Nacional(codigo, descripcion, fechaInicio, diasTraslado, stockDisponible,
                         puntos, costoDiario, descuento);
-                    
+                    if (AgregarDestinos(cantDias, destinos, aux))
+                    {
+                        this.excursiones.Add(aux);
+                    }
+                    else
+                    {
+                        ret = Nacional.ErroresAltaExcursion.Destino_Invalido;
+                    }
+                }
+                else
+                {
+                    ret = Nacional.ErroresAltaExcursion.Cod_Repetido;
                 }
             }
             return ret;
@@ -123,7 +134,7 @@ namespace Dominio
 
         #region ALTA EXCURSION INTERNACIONAL
         public Internacional.ErroresAltaExcursion AltaExcursionInternacional(string codigo, string descripcion,
-            DateTime fechaInicio, int diasTraslado, int stockDisponible,int puntos, double costoDiario,
+            DateTime fechaInicio, int diasTraslado, int stockDisponible, int puntos, double costoDiario,
             List<int> cantDias, List<string> destinos)
         {
             Internacional.ErroresAltaExcursion ret = Internacional.ErroresAltaExcursion.OK;
@@ -162,6 +173,18 @@ namespace Dominio
                 {
                     aux = new Internacional(codigo, descripcion, fechaInicio, diasTraslado, stockDisponible,
                         puntos, costoDiario);
+                    if (AgregarDestinos(cantDias, destinos, aux))
+                    {
+                        this.excursiones.Add(aux);
+                    }
+                    else
+                    {
+                        ret = Internacional.ErroresAltaExcursion.Destino_Invalido;
+                    }
+                }
+                else
+                {
+                    ret = Internacional.ErroresAltaExcursion.Cod_Repetido;
                 }
             }
             return ret;
@@ -170,14 +193,14 @@ namespace Dominio
 
         #region BUSCAR EXCURSION POR CODIGO
 
-        public Excursion BuscarExcursion(string codigo) 
+        public Excursion BuscarExcursion(string codigo)
         {
             Excursion aux = null;
             int i = 0;
 
-            while (i < this.excursiones.Count && aux == null) 
+            while (i < this.excursiones.Count && aux == null)
             {
-                if (this.excursiones[i].Codigo == codigo) 
+                if (this.excursiones[i].Codigo == codigo)
                 {
                     aux = this.excursiones[i];
                 }
@@ -191,19 +214,31 @@ namespace Dominio
 
         #region AGREGAR DESTINOS A EXCURSION
 
-        public void AgregarDestinos(List<int> cantDias, List<string> destinos, Excursion aux)
+        public bool AgregarDestinos(List<int> cantDias, List<string> destinos, Excursion aux)
         {
+            bool ret = true;
+            int i = 0;
             if (aux != null)
             {
-                for (int i = 0; i < destinos.Count; i++)
+                while (i < destinos.Count && ret)
                 {
                     Destino destino = CDestino.Instancia.BuscarDestinoPorNombre(destinos[i]);
                     if (destino != null)
                     {
-                        aux.AgregarDestinos(cantDias[i], destino);
+                        ret = aux.AgregarDestinos(cantDias[i], destino);
                     }
+                    else
+                    {
+                        ret = false;
+                    }
+                    i++;
                 }
             }
+            else
+            {
+                ret = false;
+            }
+            return ret;
         }
         #endregion
 

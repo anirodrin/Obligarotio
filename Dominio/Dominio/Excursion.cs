@@ -70,7 +70,7 @@ namespace Dominio
 
         #endregion
 
-        #region VALIDACIONES ALTA DESTINO
+        #region VALIDACIONES ALTA EXCURSION
         public static bool ValidoCodigo(string codigo)
         {
             bool ret = !string.IsNullOrEmpty(codigo);
@@ -116,15 +116,40 @@ namespace Dominio
             return costoDiario > 0;
 
         }
+
+        public static bool ValidoCantDias(int dias) 
+        {
+            return dias > 0;
+        }
         #endregion
 
         #region AGEREGAR DESTINOS
 
-        public void AgregarDestinos(int cant, Destino destino) 
+        public bool AgregarDestinos(int cant, Destino destino) 
         {
+            bool ret = true;
+
+            if (Excursion.ValidoCantDias(cant) && destino!= null) 
+            {
             DestinoExcursion aux = new DestinoExcursion(destino, cant);
             this.destinos.Add(aux);
             this.diasTotales += cant;
+            }
+            return ret;
+        }
+
+        #endregion
+
+        #region OVERRIDE METODO EQUALS
+        public override bool Equals(object obj)
+        {
+            bool ret = false;
+            Excursion aux = obj as Excursion;
+            if (aux != null)
+            {
+                ret = this.codigo == aux.codigo;
+            }
+            return ret;
         }
 
         #endregion

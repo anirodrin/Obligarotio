@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class CContrato
+    public class CContrato
     {
         #region ATRIBUTOS
         public List<Contrato> contratos = new List<Contrato>();
@@ -28,6 +28,26 @@ namespace Dominio
         }
 
         private CContrato() { }
+        #endregion
+
+
+        #region LISTADO DE EXCURSIONES CONTRATADAS ENTRE DOS FECHAS
+        public List<Excursion> ListadoExcursionesContratadasEntreDosFechas(DateTime fInicio, DateTime fFin) 
+        {
+            List<Excursion> listado = new List<Excursion>();
+
+            foreach (Contrato unC in this.contratos) 
+            {
+                if (unC.ContratoEntreFechas(fInicio, fFin)) 
+                {
+                    if (!listado.Contains(unC.Excursion)) 
+                    {
+                        listado.Add(unC.Excursion);
+                    }
+                }
+            }
+            return listado;
+        }
         #endregion
     }
 }

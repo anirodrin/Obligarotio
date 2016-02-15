@@ -138,5 +138,23 @@ namespace Dominio
         }
 
         #endregion
+
+        public List<Pasajero> RankingDePasajerosSegunPuntaje() 
+        {
+            List<Pasajero> listadoAuxiliar = new List<Pasajero>();
+            List<Pasajero> listado = new List<Pasajero>();
+
+            listadoAuxiliar.Sort();
+            int i = 0;
+
+            while (i < this.pasajeros.Count && i < 9) 
+            {
+                listado.Add(listadoAuxiliar[1]);
+                i++;
+            }
+
+            return listado;
+        }
+    
     }
 }
