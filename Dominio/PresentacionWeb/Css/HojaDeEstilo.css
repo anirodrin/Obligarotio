@@ -1,0 +1,27 @@
+﻿body {
+  padding-top: 70px;
+}
+
+btn btn-default {
+    background-color: ActiveCaption;
+}
+
+.nav {
+    width: 100%;
+    padding-left: 220px;
+}
+
+#txtPrecioMin, #txtPrecioMax {
+    Height: 32px;
+    Width: 158px;
+}
+
+.carousel .item {
+    width: 100%; 
+    max-height: 400px; 
+}
+.carousel .item img {
+    width: 100%; 
+}
+
+.center-block {float: none !important}

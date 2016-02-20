@@ -31,72 +31,20 @@ namespace Dominio
         #endregion
 
         #region ALTA PASAJERO
-        public bool AltaPasajero(string nombre, string apellido, string documento, string tipoDocumento)
+        public void AltaPasajero(string nombre, string apellido, string documento, string tipoDocumento)
         {
-            bool ret = false;
-            if (Pasajero.ValidoTipoDocumento(tipoDocumento))
-            {
-                if (Pasajero.ValidoDocumento(documento, tipoDocumento))
-                {
-                    if (Pasajero.ValidoNombre(nombre))
-                    {
-                        if (Pasajero.ValidoApellido(apellido))
-                        {
-                            Pasajero aux = BuscarPasajeroPorDocYTipo(documento, tipoDocumento);
-                            if (aux == null)
-                            {
-                                ret = true;
-                                aux = new Pasajero(nombre, apellido, documento, tipoDocumento);
-                            }
-                        }
-                    }
-                }
-            }
-            return ret;
+            Pasajero aux = new Pasajero(nombre, apellido, documento, tipoDocumento);
+            pasajeros.Add(aux);
         }
 
         #endregion
 
         #region MODIFICACION PASAJERO
-        public bool ModificacionPasajero(string nombre, string apellido, string documento, int puntaje, int id, string tipoDocumento)
+        public void ModificacionPasajero(string nombre, string apellido, string documento, int puntaje, string tipoDocumento, Pasajero aux)
         {
-            bool ret = false;
-            if (Pasajero.ValidoTipoDocumento(tipoDocumento))
-            {
-                if (Pasajero.ValidoDocumento(documento, tipoDocumento))
-                {
-                    if (Pasajero.ValidoNombre(nombre))
-                    {
-                        if (Pasajero.ValidoApellido(apellido))
-                        {
-                            if (Pasajero.ValidoPuntaje(puntaje))
-                            {
-                                Pasajero aux = BuscarPasajeroPorId(id);
-                                if (aux != null)
-                                {
-                                    aux = BuscarPasajeroPorDocYTipo(documento, tipoDocumento);
-                                    if (aux != null)
-                                    {
-                                        if (aux.Id == id)
-                                        {
-                                            aux.Modificacion(nombre, apellido, documento, puntaje, tipoDocumento);
-                                            ret = true;
-                                        }
-                                    }
-                                    else 
-                                    {
-                                        aux.Modificacion(nombre, apellido, documento, puntaje, tipoDocumento);
-                                        ret = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
 
-            }
+            aux.Modificacion(nombre, apellido, documento, puntaje, tipoDocumento);
 
-            return ret;
         }
 
         #endregion
@@ -139,7 +87,8 @@ namespace Dominio
 
         #endregion
 
-        public List<Pasajero> RankingDePasajerosSegunPuntaje() 
+        #region LISTADO PASAJEROS POR PUNTAJE ORDENADOS
+        public List<Pasajero> RankingDePasajerosSegunPuntaje()
         {
             List<Pasajero> listadoAuxiliar = new List<Pasajero>();
             List<Pasajero> listado = new List<Pasajero>();
@@ -147,7 +96,7 @@ namespace Dominio
             listadoAuxiliar.Sort();
             int i = 0;
 
-            while (i < this.pasajeros.Count && i < 9) 
+            while (i < this.pasajeros.Count && i < 9)
             {
                 listado.Add(listadoAuxiliar[1]);
                 i++;
@@ -155,6 +104,39 @@ namespace Dominio
 
             return listado;
         }
+        #endregion
+
+        #region VALIDACIONES DE ATRIBUTOS
+
+        public bool ValidoNombre(string nombre)
+        {
+            return Pasajero.ValidoNombre(nombre);
+        }
+
+        public bool ValidoApellido(string apellido)
+        {
+            return Pasajero.ValidoApellido(apellido); ;
+        }
+
+        public bool ValidoPuntaje(int puntaje)
+        {
+
+            return Pasajero.ValidoPuntaje(puntaje);
+        }
+
+        public bool ValidoDocumento(string documento, string tipoDocumento)
+        {
+           
+            return Pasajero.ValidoDocumento(documento, tipoDocumento);
+        }
+
+        public bool ValidoTipoDocumento(string tipoDocumento)
+        {
+            
+            return Pasajero.ValidoTipoDocumento(tipoDocumento);
+        }
+
+        #endregion
     
     }
 }

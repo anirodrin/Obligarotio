@@ -29,6 +29,21 @@ namespace Dominio
             get { return this.codigo; }
         }
 
+        public DateTime FechaInicio
+        {
+            get { return this.fechaInicio; }
+        }
+
+        public int DiasTotales
+        {
+            get { return this.diasTotales; }
+        }
+
+        public string Descripcion
+        {
+            get { return this.descripcion; }
+        }
+
         public List<DestinoExcursion> Destinos
         {
             get { return this.destinos; }
@@ -117,7 +132,7 @@ namespace Dominio
 
         }
 
-        public static bool ValidoCantDias(int dias) 
+        public static bool ValidoCantDias(int dias)
         {
             return dias > 0;
         }

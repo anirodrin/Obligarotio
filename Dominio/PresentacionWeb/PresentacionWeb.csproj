@@ -57,20 +57,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AltaExcursion.aspx" />
+    <Content Include="AltaExcursionNacional.aspx" />
     <Content Include="Css\bootstrap.css" />
+    <Content Include="Css\HojaDeEstilo.css" />
     <Content Include="Global.asax" />
     <Content Include="JavaScript\bootstrap.min.js" />
     <Content Include="JavaScript\jquery-1.11.3.js" />
+    <Content Include="JavaScript\ValidarAltaExcursion.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AltaExcursion.aspx.cs">
-      <DependentUpon>AltaExcursion.aspx</DependentUpon>
+    <Compile Include="AltaExcursionNacional.aspx.cs">
+      <DependentUpon>AltaExcursionNacional.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AltaExcursion.aspx.designer.cs">
-      <DependentUpon>AltaExcursion.aspx</DependentUpon>
+    <Compile Include="AltaExcursionNacional.aspx.designer.cs">
+      <DependentUpon>AltaExcursionNacional.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -97,6 +99,10 @@
     <ProjectReference Include="..\Aplicacion\Aplicacion.csproj">
       <Project>{572322b9-e608-40b2-9f1b-7bde09489c3a}</Project>
       <Name>Aplicacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dominio\Dominio.csproj">
+      <Project>{682fe566-40cd-4474-87a3-12325ea7f6eb}</Project>
+      <Name>Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

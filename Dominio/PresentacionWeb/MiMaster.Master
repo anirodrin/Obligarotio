@@ -9,19 +9,28 @@
     <script src="JavaScript/jquery-1.11.3.js"></script>
     <script src="JavaScript/bootstrap.min.js"></script>
     <link href="Css/bootstrap.css" rel="stylesheet" />
+    <link href="Css/HojaDeEstilo.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
-            <asp:Menu ID="menuDeNavegacion" runat="server" Orientation="Horizontal">
+        <asp:Menu ID="Menu" runat="server" EnableViewState="false" 
+          IncludeStyleBlock="false" Orientation="Horizontal"
+          CssClass="navbar navbar-fixed-top"
+          StaticMenuStyle-CssClass= "nav"
+          StaticSelectedStyle-CssClass="active"
+          DynamicMenuStyle-CssClass="dropdown-menu">
                 <Items>
-                    <asp:MenuItem NavigateUrl="~/AltaExcursion.aspx" Text="Alta Excursion" Value="Alta Excursion"></asp:MenuItem>
+                    <asp:MenuItem Text="Alta Excursion" Value="Alta Excursion">
+                        <asp:MenuItem NavigateUrl="~/AltaExcursionNacional.aspx" Text="Alta Excursion Nacional" Value="Alta Excursion Nacional"></asp:MenuItem>
+                    </asp:MenuItem>
                 </Items>
             </asp:Menu>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+            
         
         </asp:ContentPlaceHolder>
     </div>

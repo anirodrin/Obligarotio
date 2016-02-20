@@ -1,1 +1,9 @@
 C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\PresentacionWeb\obj\Debug\PresentacionWeb.csprojResolveAssemblyReference.cache
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\PresentacionWeb\bin\PresentacionWeb.dll
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\PresentacionWeb\bin\PresentacionWeb.pdb
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\PresentacionWeb\bin\Aplicacion.dll
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\PresentacionWeb\bin\Dominio.dll
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\PresentacionWeb\bin\Aplicacion.pdb
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\PresentacionWeb\bin\Dominio.pdb
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\PresentacionWeb\obj\Debug\PresentacionWeb.dll
+C:\Users\AnaR\Desktop\FACULTAD-ORT\TALLERES\TALLER DE OBJETOS\Obligatorio\Dominio\PresentacionWeb\obj\Debug\PresentacionWeb.pdb

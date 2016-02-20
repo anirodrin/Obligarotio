@@ -32,60 +32,36 @@ namespace Dominio
 
         #region ALTA DESTINO
 
-        public bool AltaDestino(string nombre, string pais, string ciudad, bool esNacional) 
+        public void AltaDestino(string nombre, string pais, string ciudad, bool esNacional)
         {
-            bool ret = false;
-            if (Destino.ValidoNombre(nombre)) 
-            {
-                if (Destino.ValidoPais(pais)) 
-                {
-                    if (Destino.ValidoCiudad(ciudad)) 
-                    {
-                        Destino aux = BuscarDestinoPorNombre(nombre);
-                        if (aux == null) 
-                        {
-                            nombre = nombre.ToUpper();
-                            pais = pais.ToUpper();
-                            ciudad = ciudad.ToUpper();
-                            aux = new Destino(nombre, pais, ciudad, esNacional);
-                            ret = true;
-                        }
-                    }
-                }
-            }
-            return ret;
+            nombre = nombre.ToUpper();
+            pais = pais.ToUpper();
+            ciudad = ciudad.ToUpper();
+            Destino aux = new Destino(nombre, pais, ciudad, esNacional);
+            this.destinos.Add(aux);
+
         }
 
         #endregion
 
         #region BAJA DESTINO
-        public bool BajaDestino(string nombre)
+        public void BajaDestino(Destino aux)
         {
-            bool ret = false;
-            Destino aux = BuscarDestinoPorNombre(nombre);
-            if (aux != null) 
-            {
-                if (!CExcursion.Instancia.TieneDestino(aux)) 
-                {
-                    this.destinos.Remove(aux);
-                    ret = false;
-                }
-            }
-            return ret;
+            this.destinos.Remove(aux);
         }
         #endregion
 
         #region BUSQUEDA DE DESTINOS POR NOMBRE
 
-        public Destino BuscarDestinoPorNombre(string nombre) 
+        public Destino BuscarDestinoPorNombre(string nombre)
         {
             Destino aux = null;
 
             int i = 0;
 
-            while (i < this.destinos.Count && aux == null) 
+            while (i < this.destinos.Count && aux == null)
             {
-                if (this.destinos[i].Nombre == nombre.ToUpper()) 
+                if (this.destinos[i].Nombre == nombre.ToUpper())
                 {
                     aux = this.destinos[i];
                 }
@@ -97,13 +73,13 @@ namespace Dominio
         #endregion
 
         #region DESTINOS NACIONALES
-        public List<Destino> DestinosNacionales() 
+        public List<Destino> DestinosNacionales()
         {
             List<Destino> listado = new List<Destino>();
 
-            foreach (Destino unD in this.destinos) 
+            foreach (Destino unD in this.destinos)
             {
-                if (unD.EsNacional) 
+                if (unD.EsNacional)
                 {
                     listado.Add(unD);
                 }
@@ -123,10 +99,28 @@ namespace Dominio
                 {
                     listado.Add(unD);
                 }
-            }
+            }          
             return listado;
         }
         #endregion
 
+        #region VALIIDACIONES ALTA DESTINO
+
+        public bool ValidoNombre(string nombre)
+        {
+            return Destino.ValidoNombre(nombre);
+        }
+
+        public bool ValidoPais(string pais)
+        {
+            return Destino.ValidoPais(pais);
+        }
+
+        public bool ValidoCiudad(string ciudad)
+        {
+            return Destino.ValidoCiudad(ciudad);
+        }
+
+        #endregion
     }
 }

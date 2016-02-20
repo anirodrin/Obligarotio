@@ -50,145 +50,48 @@ namespace Dominio
         #endregion
 
         #region LISTADO EXCURSIONES QUE TENGAN DETERMINADO DESTINO
-        public List<Excursion> ListadoExcusrionesQueTienenDestino(string nombre)
+        public List<Excursion> ListadoExcusrionesQueTienenDestino(Destino aux)
         {
             List<Excursion> listado = new List<Excursion>();
-            Destino aux = CDestino.Instancia.BuscarDestinoPorNombre(nombre);
-
-            if (aux != null)
+            foreach (Excursion unaE in this.excursiones)
             {
-                foreach (Excursion unaE in this.excursiones)
+                if (unaE.TieneDestino(aux))
                 {
-                    if (unaE.TieneDestino(aux))
-                    {
-                        listado.Add(unaE);
-                    }
+                    listado.Add(unaE);
                 }
             }
             return listado;
         }
         #endregion
 
-        #region ALTA EXCURSION NACIONAL
-        public Nacional.ErroresAltaExcursion AltaExcursionNacional(string codigo, string descripcion,
+        #region CREAR EXCURSION NACIONAL
+        public Excursion CrearExcursionInternacional(string codigo, string descripcion,
             DateTime fechaInicio, int diasTraslado, int stockDisponible, int puntos, double costoDiario, int descuento,
             List<int> cantDias, List<string> destinos)
         {
-            Nacional.ErroresAltaExcursion ret = Nacional.ErroresAltaExcursion.OK;
-            if (!Excursion.ValidoCodigo(codigo))
-            {
-                ret = Nacional.ErroresAltaExcursion.Cod_Invalido;
-            }
-            else if (!Excursion.ValidoDescripcion(descripcion))
-            {
-                ret = Nacional.ErroresAltaExcursion.Desc_Vaicia;
-            }
-            else if (!Excursion.ValidoFechaInicio(fechaInicio))
-            {
-                ret = Nacional.ErroresAltaExcursion.Fi_Invalida;
-            }
-            else if (!Excursion.ValidoDiasTraslado(diasTraslado))
-            {
-                ret = Nacional.ErroresAltaExcursion.DiasTraslado_Invalido;
-            }
-            else if (!Excursion.ValidoStockDisponible(stockDisponible))
-            {
-                ret = Nacional.ErroresAltaExcursion.Stock_Invalido;
-            }
-            else if (!Excursion.ValidoPuntos(puntos))
-            {
-                ret = Nacional.ErroresAltaExcursion.Puntos_Invalido;
-            }
-            else if (!Excursion.ValidoCostoDiario(costoDiario))
-            {
-                ret = Nacional.ErroresAltaExcursion.Costo_Invalido;
-            }
-            else if (!Nacional.ValidoDescuento(descuento))
-            {
-                ret = Nacional.ErroresAltaExcursion.Descuento_Invalido;
-            }
-            else
-            {
-                Excursion aux = BuscarExcursion(codigo);
-                if (aux == null)
-                {
-                    aux = new Nacional(codigo, descripcion, fechaInicio, diasTraslado, stockDisponible,
-                        puntos, costoDiario, descuento);
-                    if (AgregarDestinos(cantDias, destinos, aux))
-                    {
-                        this.excursiones.Add(aux);
-                    }
-                    else
-                    {
-                        ret = Nacional.ErroresAltaExcursion.Destino_Invalido;
-                    }
-                }
-                else
-                {
-                    ret = Nacional.ErroresAltaExcursion.Cod_Repetido;
-                }
-            }
-            return ret;
+             return new Nacional(codigo, descripcion, fechaInicio, diasTraslado, stockDisponible,
+                 puntos, costoDiario, descuento);
         }
         #endregion
 
-        #region ALTA EXCURSION INTERNACIONAL
-        public Internacional.ErroresAltaExcursion AltaExcursionInternacional(string codigo, string descripcion,
+        #region CREAR EXCURSION INTERNACIONAL
+        public Excursion CrearExcursionInternacional(string codigo, string descripcion,
             DateTime fechaInicio, int diasTraslado, int stockDisponible, int puntos, double costoDiario,
             List<int> cantDias, List<string> destinos)
         {
-            Internacional.ErroresAltaExcursion ret = Internacional.ErroresAltaExcursion.OK;
-            if (!Excursion.ValidoCodigo(codigo))
-            {
-                ret = Internacional.ErroresAltaExcursion.Cod_Invalido;
-            }
-            else if (!Excursion.ValidoDescripcion(descripcion))
-            {
-                ret = Internacional.ErroresAltaExcursion.Desc_Vaicia;
-            }
-            else if (!Excursion.ValidoFechaInicio(fechaInicio))
-            {
-                ret = Internacional.ErroresAltaExcursion.Fi_Invalida;
-            }
-            else if (!Excursion.ValidoDiasTraslado(diasTraslado))
-            {
-                ret = Internacional.ErroresAltaExcursion.DiasTraslado_Invalido;
-            }
-            else if (!Excursion.ValidoStockDisponible(stockDisponible))
-            {
-                ret = Internacional.ErroresAltaExcursion.Stock_Invalido;
-            }
-            else if (!Excursion.ValidoPuntos(puntos))
-            {
-                ret = Internacional.ErroresAltaExcursion.Puntos_Invalido;
-            }
-            else if (!Excursion.ValidoCostoDiario(costoDiario))
-            {
-                ret = Internacional.ErroresAltaExcursion.Costo_Invalido;
-            }
-            else
-            {
-                Excursion aux = BuscarExcursion(codigo);
-                if (aux == null)
-                {
-                    aux = new Internacional(codigo, descripcion, fechaInicio, diasTraslado, stockDisponible,
-                        puntos, costoDiario);
-                    if (AgregarDestinos(cantDias, destinos, aux))
-                    {
-                        this.excursiones.Add(aux);
-                    }
-                    else
-                    {
-                        ret = Internacional.ErroresAltaExcursion.Destino_Invalido;
-                    }
-                }
-                else
-                {
-                    ret = Internacional.ErroresAltaExcursion.Cod_Repetido;
-                }
-            }
-            return ret;
+            return new Internacional(codigo, descripcion, fechaInicio, diasTraslado, stockDisponible,
+                 puntos, costoDiario);
+
         }
+        #endregion
+
+        #region ALTA EXCURSION
+
+        public void AltaExcursion(Excursion aux) 
+        {
+            this.excursiones.Add(aux);
+        }
+
         #endregion
 
         #region BUSCAR EXCURSION POR CODIGO
@@ -214,33 +117,78 @@ namespace Dominio
 
         #region AGREGAR DESTINOS A EXCURSION
 
-        public bool AgregarDestinos(List<int> cantDias, List<string> destinos, Excursion aux)
+        public bool AgregarDestinos(int cantDias, Destino destino, Excursion aux)
         {
-            bool ret = true;
-            int i = 0;
-            if (aux != null)
-            {
-                while (i < destinos.Count && ret)
-                {
-                    Destino destino = CDestino.Instancia.BuscarDestinoPorNombre(destinos[i]);
-                    if (destino != null)
-                    {
-                        ret = aux.AgregarDestinos(cantDias[i], destino);
-                    }
-                    else
-                    {
-                        ret = false;
-                    }
-                    i++;
-                }
-            }
-            else
-            {
-                ret = false;
-            }
-            return ret;
+
+            return aux.AgregarDestinos(cantDias, destino);
+
         }
         #endregion
 
+        #region DESTINOS POR EXCURSION
+
+        public List<Destino> DestinosPorExcursion(Excursion aux) 
+        {
+            List<Destino> destinos = new List<Destino>();
+            if (aux != null) 
+            {
+                List<DestinoExcursion> destinoExcusrion = aux.Destinos;
+                foreach(DestinoExcursion unD in destinoExcusrion)
+                {
+                    destinos.Add(unD.Destino);
+                }
+            }
+            return destinos;
+        }
+
+        #endregion
+
+        #region VALIDACIONES ALTA EXCURSION
+        public bool ValidoCodigo(string codigo)
+        {
+            return Excursion.ValidoCodigo(codigo);
+        }
+
+        public bool ValidoDescripcion(string descripcion)
+        {
+            return Excursion.ValidoDescripcion(descripcion);
+        }
+
+        public bool ValidoFechaInicio(DateTime fechaInicio)
+        {
+            return Excursion.ValidoFechaInicio(fechaInicio);
+        }
+
+        public bool ValidoDiasTraslado(int diasTraslado)
+        {
+            return Excursion.ValidoDiasTraslado(diasTraslado);
+        }
+
+        public bool ValidoStockDisponible(int stockDisponible)
+        {
+            return Excursion.ValidoStockDisponible(stockDisponible);
+        }
+
+        public bool ValidoPuntos(int puntos)
+        {
+            return puntos > 0;
+        }
+
+        public bool ValidoCostoDiario(double costoDiario)
+        {
+            return Excursion.ValidoCostoDiario(costoDiario);
+        }
+
+        public bool ValidoCantDias(int dias)
+        {
+            return Excursion.ValidoCantDias(dias);
+        }
+
+        public bool ValidoDescuento(int descuento)
+        {
+            return Nacional.ValidoDescuento(descuento);
+        }
+        #endregion
+   
     }
 }
